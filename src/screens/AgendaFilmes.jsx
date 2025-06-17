@@ -33,6 +33,26 @@ export default function AgendaForm({ navigation, route }) {
 
   const theme = useTheme();
 
+  // Função para aplicar máscara de data DD/MM/AAAA
+  function formatarData(text) {
+    // Remove tudo que não for número
+    let data = text.replace(/\D/g, '');
+
+    // Limita máximo de 8 dígitos (DDMMYYYY)
+    if (data.length > 8) {
+      data = data.slice(0, 8);
+    }
+
+    // Insere as barras automaticamente
+    if (data.length >= 5) {
+      return `${data.slice(0, 2)}/${data.slice(2, 4)}/${data.slice(4)}`;
+    } else if (data.length >= 3) {
+      return `${data.slice(0, 2)}/${data.slice(2)}`;
+    } else {
+      return data;
+    }
+  }
+
   function validarData(data) {
     const regex = /^\d{2}\/\d{2}\/\d{4}$/;
     if (!regex.test(data)) return false;
@@ -108,13 +128,14 @@ export default function AgendaForm({ navigation, route }) {
               label="Data Planejada (DD/MM/AAAA)"
               mode="outlined"
               value={dataPlanejada}
-              onChangeText={setDataPlanejada}
+              onChangeText={text => setDataPlanejada(formatarData(text))}
               style={styles.input}
               keyboardType="numeric"
               activeOutlineColor="#D32F2F"
               left={<TextInput.Icon name="calendar" color="#D32F2F" />}
               placeholder="Ex: 25/12/2024"
               placeholderTextColor="#B71C1C"
+              maxLength={10} // limite para 10 caracteres DD/MM/AAAA
             />
 
             {/* Prioridade com Menu */}
