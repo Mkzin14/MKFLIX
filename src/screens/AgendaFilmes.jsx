@@ -13,6 +13,8 @@ import {
   Card,
   Surface,
   Menu,
+  IconButton,
+  useTheme,
 } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -28,6 +30,8 @@ export default function AgendaForm({ navigation, route }) {
 
   const prioridades = ['Alta', 'Média', 'Baixa'];
   const statusList = ['Não iniciado', 'Em andamento', 'Assistido'];
+
+  const theme = useTheme();
 
   function validarData(data) {
     const regex = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -85,17 +89,18 @@ export default function AgendaForm({ navigation, route }) {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: theme.colors.background }}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <Surface style={styles.surface}>
-        <Card style={styles.card}>
+        <Card style={styles.card} elevation={4}>
           <Card.Title
             title="Agendar Filme"
             titleStyle={styles.cardTitle}
+            left={(props) => <IconButton {...props} icon="calendar-clock" color="#D32F2F" />}
           />
           <Card.Content>
-            <Text variant="titleMedium" style={styles.titulo}>
+            <Text variant="titleLarge" style={styles.titulo}>
               {filme.title || 'Filme não encontrado'}
             </Text>
 
@@ -107,6 +112,8 @@ export default function AgendaForm({ navigation, route }) {
               style={styles.input}
               keyboardType="numeric"
               activeOutlineColor="#D32F2F"
+              left={<TextInput.Icon name="calendar" color="#D32F2F" />}
+              placeholder="Ex: 25/12/2024"
               placeholderTextColor="#B71C1C"
             />
 
@@ -122,7 +129,10 @@ export default function AgendaForm({ navigation, route }) {
                   style={styles.input}
                   onFocus={() => setMenuPrioridadeVisible(true)}
                   activeOutlineColor="#D32F2F"
+                  right={<TextInput.Icon name="menu-down" color="#D32F2F" />}
+                  placeholder="Selecione prioridade"
                   placeholderTextColor="#B71C1C"
+                  showSoftInputOnFocus={false} // evita teclado
                 />
               }
             >
@@ -151,7 +161,10 @@ export default function AgendaForm({ navigation, route }) {
                   style={styles.input}
                   onFocus={() => setMenuStatusVisible(true)}
                   activeOutlineColor="#D32F2F"
+                  right={<TextInput.Icon name="menu-down" color="#D32F2F" />}
+                  placeholder="Selecione status"
                   placeholderTextColor="#B71C1C"
+                  showSoftInputOnFocus={false}
                 />
               }
             >
@@ -173,10 +186,12 @@ export default function AgendaForm({ navigation, route }) {
               mode="outlined"
               value={comentario}
               onChangeText={setComentario}
-              style={styles.input}
+              style={[styles.input, { minHeight: 80 }]}
               multiline
               activeOutlineColor="#D32F2F"
+              placeholder="Deixe suas observações aqui..."
               placeholderTextColor="#B71C1C"
+              left={<TextInput.Icon name="note-text" color="#D32F2F" />}
             />
 
             <Button
@@ -185,6 +200,8 @@ export default function AgendaForm({ navigation, route }) {
               buttonColor="#D32F2F"
               style={styles.botaoSalvar}
               textColor="#FFF"
+              icon="check-circle"
+              contentStyle={{ flexDirection: 'row-reverse' }}
             >
               Salvar Agenda
             </Button>
@@ -198,28 +215,34 @@ export default function AgendaForm({ navigation, route }) {
 const styles = StyleSheet.create({
   surface: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#FFF0F0', // fundo claro com tom vermelho suave
+    padding: 20,
+    backgroundColor: '#F9F9F9', // fundo claro neutro
   },
   card: {
-    padding: 8,
-    borderRadius: 12,
-    backgroundColor: '#FFF', // branco para contraste
+    borderRadius: 14,
+    backgroundColor: '#FFF',
   },
   cardTitle: {
     color: '#D32F2F',
-    fontWeight: 'bold',
+    fontWeight: '700',
+    fontSize: 22,
   },
   titulo: {
-    marginBottom: 10,
+    marginBottom: 16,
     color: '#B71C1C',
     fontWeight: '600',
+    fontSize: 18,
   },
   input: {
-    marginBottom: 12,
-    color: '#000',
+    marginBottom: 16,
+    backgroundColor: '#FAFAFA',
+    borderRadius: 8,
+    fontSize: 16,
   },
   botaoSalvar: {
-    marginTop: 10,
+    marginTop: 20,
+    borderRadius: 8,
+    height: 50,
+    justifyContent: 'center',
   },
 });

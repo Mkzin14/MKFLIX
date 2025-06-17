@@ -1,4 +1,3 @@
-// src/screens/PerfilUsuario.jsx
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -117,6 +116,7 @@ export default function PerfilUsuario() {
       <Surface style={styles.surface}>
         <ScrollView contentContainerStyle={styles.scroll}>
           <Card style={styles.cardForm}>
+            {/* Aqui removi o acesso fonts.medium.fontFamily */}
             <Card.Title title="Cadastro de Usuários" titleStyle={styles.title} />
             <Card.Content>
               <TextInput
