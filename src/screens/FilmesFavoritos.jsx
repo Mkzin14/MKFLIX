@@ -46,13 +46,7 @@ export default function FilmesFavoritosScreen() {
     try {
       const novaLista = filmesFavoritos.map(f =>
         f.id === filmeEditando.id
-          ? {
-              ...f,
-              nota,
-              comentario,
-              dataAssistido,
-              companhia,
-            }
+          ? { ...f, nota, comentario, dataAssistido, companhia }
           : f
       );
       setFilmesFavoritos(novaLista);
@@ -137,7 +131,9 @@ export default function FilmesFavoritosScreen() {
       <Text style={styles.titulo}>Meus Filmes Favoritos</Text>
 
       {filmesFavoritos.length === 0 ? (
-        <Text style={styles.mensagemVazia}>Você ainda não adicionou nenhum filme aos favoritos. Vá para a tela "Home" para começar!</Text>
+        <Text style={styles.mensagemVazia}>
+          Você ainda não adicionou nenhum filme aos favoritos. Vá para a tela "Home" para começar!
+        </Text>
       ) : (
         <FlatList
           data={filmesFavoritos}
@@ -202,13 +198,13 @@ export default function FilmesFavoritosScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#121212',
     padding: 12,
   },
   titulo: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: '#D32F2F', // vermelho forte
+    color: '#D32F2F',
     textAlign: 'center',
     marginBottom: 15,
   },
@@ -216,11 +212,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     marginTop: 50,
-    color: '#B71C1C', // vermelho escuro
+    color: '#FFCDD2',
     paddingHorizontal: 20,
   },
   card: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#1e1e1e',
     marginBottom: 15,
     borderRadius: 10,
     elevation: 5,
@@ -235,14 +231,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     padding: 10,
     borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
+    borderTopColor: '#333',
   },
   botaoEditar: {
-    backgroundColor: '#D32F2F', // vermelho forte
+    backgroundColor: '#D32F2F',
     width: '48%',
   },
   botaoExcluir: {
-    borderColor: '#D32F2F', // vermelho forte
+    borderColor: '#D32F2F',
     borderWidth: 1,
     width: '48%',
   },
@@ -252,12 +248,12 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.6)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   formularioEdicaoContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1e1e1e',
     padding: 25,
     margin: 20,
     borderRadius: 12,
@@ -270,31 +266,31 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
-    color: '#D32F2F', // vermelho forte
+    color: '#D32F2F',
   },
   modalFilmeTitle: {
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 15,
-    color: '#000000',
+    color: '#FFFFFF',
   },
   inputModal: {
     marginBottom: 15,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#2c2c2c',
     padding: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#D32F2F', // borda vermelha
-    color: '#000000',
+    borderColor: '#D32F2F',
+    color: '#FFF',
   },
   modalButton: {
     marginTop: 10,
   },
   cardTitle: {
-    color: '#000000',
+    color: '#FFF',
     fontWeight: 'bold',
   },
   cardParagraph: {
-    color: '#333333',
+    color: '#FFCDD2',
   },
 });
